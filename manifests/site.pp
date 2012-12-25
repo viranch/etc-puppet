@@ -1,0 +1,3 @@
+node /^ip-.*$/ {
+  include transmission
+}
