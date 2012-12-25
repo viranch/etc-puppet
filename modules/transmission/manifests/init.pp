@@ -18,11 +18,11 @@ class transmission {
 
   file { 'settings.json':
     path => "/var/lib/transmission/.config/transmission-daemon/settings.json",
-    source => 'puppet:///transmission/settings.json',
+    source => 'puppet:///modules/transmission/settings.json',
     require => File['ensure-owner'],
   }
 
-  exec { "/usr/bin/transmission-daemon":
+  @exec { "/usr/bin/transmission-daemon":
     require => File['settings.json'],
   }
 }
