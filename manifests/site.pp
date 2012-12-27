@@ -1,11 +1,24 @@
+import "templates"
+
 node /^ip-.*$/ {
 
-  user { 'arch':
+  $packages = ['zsh']
+  $user = 'arch'
+
+  package { $packages: ensure => installed }
+
+  user { $user:
     managehome => true,
+    shell => '/bin/zsh',
+    require => Package['zsh'],
+  }
+
+  class { 'base-node':
+    user => $::user,
   }
 
   class { 'transmission':
-    user => 'arch',
-    require => User['arch'],
+    user => $::user,
+    require => User[$::user],
   }
 }
