@@ -1,3 +1,11 @@
 node /^ip-.*$/ {
-  include transmission
+
+  user { 'arch':
+    managehome => true,
+  }
+
+  class { 'transmission':
+    user => 'arch',
+    require => User['arch'],
+  }
 }
