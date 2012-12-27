@@ -6,7 +6,7 @@ class transmission($user) {
 
   $dirs = ["${home}/.config", "${home}/.config/transmission-daemon", "${home}/Downloads"]
 
-  file { $config_dirs:
+  file { $dirs:
     ensure => directory,
     owner => $user,
     require => Package['transmission-cli'],
@@ -16,7 +16,7 @@ class transmission($user) {
     path => "${home}/.config/transmission-daemon/settings.json",
     source => 'puppet:///modules/transmission/settings.json',
     owner => $user, mode => 644,
-    require => File[$config_dirs],
+    require => File[$dirs],
   }
 
   exec { '/usr/bin/transmission-daemon':
