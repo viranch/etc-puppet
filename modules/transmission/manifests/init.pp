@@ -15,7 +15,7 @@ class transmission($user) {
   file { 'settings.json':
     path => "${home}/.config/transmission-daemon/settings.json",
     source => 'puppet:///modules/transmission/settings.json',
-    owner => $user, mode => 644,
+    owner => $user, mode => 600,
     require => File[$dirs],
   }
 
