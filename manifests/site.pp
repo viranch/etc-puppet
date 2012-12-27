@@ -24,7 +24,7 @@ node /^ip-.*$/ {
 
   file { '/etc/ssh/sshd_config':
     source => 'puppet:///modules/sshd/sshd_config',
-    owner => root, group => root, owner => 644,
+    owner => root, group => root, mode => 644,
   }
 
 }
