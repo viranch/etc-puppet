@@ -21,4 +21,10 @@ node /^ip-.*$/ {
     user => $::user,
     require => User[$user],
   }
+
+  file { '/etc/ssh/sshd_config':
+    source => 'puppet:///modules/sshd/sshd_config',
+    owner => root, group => root, owner => 644,
+  }
+
 }
