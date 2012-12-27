@@ -19,6 +19,6 @@ node /^ip-.*$/ {
 
   class { 'transmission':
     user => $::user,
-    require => User[$::user],
+    require => User[$user],
   }
 }
