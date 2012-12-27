@@ -4,7 +4,9 @@ class transmission($user) {
 
   package { 'transmission-cli': ensure => installed }
 
-  file { ["${home}/.config", "${home}/.config/transmission-daemon"]:
+  $dirs = ["${home}/.config", "${home}/.config/transmission-daemon", "${home}/Downloads"]
+
+  file { $config_dirs:
     ensure => directory,
     owner => $user,
     require => Package['transmission-cli'],
@@ -14,19 +16,13 @@ class transmission($user) {
     path => "${home}/.config/transmission-daemon/settings.json",
     source => 'puppet:///modules/transmission/settings.json',
     owner => $user, mode => 644,
-    require => File['config-dir'],
-  }
-
-  file { 'downloads':
-    path => "${home}/Downloads",
-    ensure => directory,
-    owner => $user,
+    require => File[$config_dirs],
   }
 
   exec { '/usr/bin/transmission-daemon':
     user => $user,
     unless => '/bin/pidof transmission-daemon',
-    require => File['settings.json', 'downloads'],
+    require => File['settings.json'],
   }
 
 }
