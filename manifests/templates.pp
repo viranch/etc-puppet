@@ -9,7 +9,7 @@ class base-node($user) {
   exec { 'clone-dotfiles':
     command => "/usr/bin/git clone git://github.com/viranch/dotfiles.git ${home}/.dotfiles",
     user => $user,
-    unless => "test -d /home/${user}/.dotfiles",
+    creates => "${home}/.dotfiles",
     require => User[$user],
   }
 
