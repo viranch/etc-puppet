@@ -4,17 +4,10 @@ class transmission($user) {
 
   package { 'transmission-cli': ensure => installed }
 
-  file { 'config-dir':
-    path => "${home}/.config/transmission-daemon",
-    ensure => directory,
-    recurse => true,
-    require => Package['transmission-cli'],
-  }
-
   file { ["${home}/.config", "${home}/.config/transmission-daemon"]:
     ensure => directory,
     owner => $user,
-    require => File['config-dir'],
+    require => Package['transmission-cli'],
   }
 
   file { 'settings.json':
