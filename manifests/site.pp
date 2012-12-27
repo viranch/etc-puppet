@@ -27,4 +27,12 @@ node /^ip-.*$/ {
     owner => root, group => root, mode => 644,
   }
 
+  include apache
+
+  file { '/srv/http/stuff':
+    ensure => link,
+    target => "/home/${user}/Downloads",
+    require => Class['apache', 'transmission'],
+  }
+
 }
