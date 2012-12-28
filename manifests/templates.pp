@@ -1,5 +1,9 @@
 class base-node($user) {
 
+  class { 'users':
+    username => $user,
+  }
+
   include git
 
   $home = "/home/${user}"

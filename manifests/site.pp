@@ -2,17 +2,7 @@ import "templates"
 
 node /^ip-.*$/ {
 
-  ### Misc stuff ###
-  $packages = ['zsh']
   $user = 'arch'
-
-  package { $packages: ensure => installed }
-
-  user { $user:
-    managehome => true,
-    shell => '/bin/zsh',
-    require => Package['zsh'],
-  }
 
   ### sshd_config ###
   file { '/etc/ssh/sshd_config':
@@ -20,7 +10,7 @@ node /^ip-.*$/ {
     owner => root, group => root, mode => 644,
   }
 
-  ### dotfiles + scripts ###
+  ### user setup ###
   class { 'base-node':
     user => $::user,
   }
