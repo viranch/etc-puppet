@@ -31,4 +31,7 @@ node /^.*$/ {
     require => Class['apache', 'transmission'],
   }
 
+  ### quassel ###
+  include quassel
+
 }
