@@ -1,8 +1,8 @@
 import "templates"
 
-node /^ip-.*$/ {
+node /^.*$/ {
 
-  $user = 'arch'
+  $user = 'viranch'
 
   ### sshd_config ###
   file { '/etc/ssh/sshd_config':

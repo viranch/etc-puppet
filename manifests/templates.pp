@@ -15,13 +15,6 @@ class base-node($user) {
     require => User[$user],
   }
 
-  $the_user = $user
-  exec { 'run-setup-script':
-    command => "${home}/.dotfiles/setup.sh",
-    user => $the_user,
-    require => Git::Repo['dotfiles'],
-  }
-
   $scripts_dir = "${home}/playground"
 
   git::repo { 'scripts':
