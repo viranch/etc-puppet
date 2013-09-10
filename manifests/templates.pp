@@ -35,7 +35,7 @@ class base-node($user) {
     require => User[$user],
   }
 
-  $packages = [ 'python2' ]
+  $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml' ]
 
   package { $packages: ensure => installed }
 
