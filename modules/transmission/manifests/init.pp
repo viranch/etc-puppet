@@ -4,7 +4,8 @@ class transmission($user) {
 
   package { 'transmission-cli': ensure => installed }
 
-  $dirs = ["${home}/.config/transmission-daemon", "${home}/Downloads/watch"]
+  $dirs = ["${home}/.config/transmission-daemon", "${home}/.config",
+    "${home}/Downloads/watch", "${home}/Downloads"]
 
   file { $dirs:
     ensure => directory, recurse => true,
