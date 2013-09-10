@@ -4,6 +4,11 @@ class base-node($user) {
     username => $user,
   }
 
+  service { 'cronie':
+    ensure => running,
+    enable => true,
+  }
+
   include git
 
   $home = "/home/${user}"
