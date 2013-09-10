@@ -4,10 +4,10 @@ class transmission($user) {
 
   package { 'transmission-cli': ensure => installed }
 
-  $dirs = ["${home}/.config", "${home}/.config/transmission-daemon", "${home}/Downloads"]
+  $dirs = ["${home}/.config/transmission-daemon", "${home}/Downloads/watch"]
 
   file { $dirs:
-    ensure => directory,
+    ensure => directory, recurse => true,
     owner => $user,
     require => Package['transmission-cli'],
   }
@@ -19,10 +19,9 @@ class transmission($user) {
     require => File[$dirs],
   }
 
-  exec { '/usr/bin/transmission-daemon':
-    user => $user,
-    unless => '/bin/pidof transmission-daemon',
-    require => File['settings.json'],
+  cron { 'transmission-daemon':
+    command => '/usr/bin/transmission-daemon',
+    special => 'reboot',
   }
 
 }
