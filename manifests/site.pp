@@ -1,6 +1,6 @@
 import "templates"
 
-node /^.*$/ {
+node 'lazybit' {
 
   $user = 'viranch'
 
