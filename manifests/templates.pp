@@ -30,4 +30,8 @@ class base-node($user) {
     require => User[$user],
   }
 
+  $packages = [ 'python2' ]
+
+  package { $packages: ensure => installed }
+
 }
