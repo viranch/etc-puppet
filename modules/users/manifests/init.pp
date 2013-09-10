@@ -1,6 +1,6 @@
 class users($username) {
 
-  $packages = ['zsh', 'sudo']
+  $packages = ['zsh', 'sudo', 'tmux']
 
   package { $packages: ensure => installed }
 
