@@ -22,6 +22,7 @@ node /^.*$/ {
   }
 
   ### http server ###
+  $port = '8080'
   include apache
 
   file { '/srv/http/stuff':
