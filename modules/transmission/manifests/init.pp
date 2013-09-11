@@ -23,6 +23,7 @@ class transmission($user) {
   cron { 'transmission-daemon':
     command => '/usr/bin/transmission-daemon',
     special => 'reboot',
+    user => $user,
   }
 
 }
