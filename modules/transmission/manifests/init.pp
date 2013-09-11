@@ -8,7 +8,7 @@ class transmission($user) {
     "${home}/Downloads/watch", "${home}/Downloads"]
 
   file { $dirs:
-    ensure => directory, recurse => true,
+    ensure => directory,
     owner => $user,
     require => Package['transmission-cli'],
   }
