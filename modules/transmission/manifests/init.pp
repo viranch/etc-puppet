@@ -20,6 +20,12 @@ class transmission($user) {
     require => File[$dirs],
   }
 
+  file { 'tv.conf':
+    path => "${home}/.tv.conf",
+    source => "puppet:///modules/transmission/tv.conf",
+    owner => $user, mode => 640,
+  }
+
   cron { 'transmission-daemon':
     command => '/usr/bin/transmission-daemon',
     special => 'reboot',
