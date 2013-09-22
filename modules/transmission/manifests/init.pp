@@ -35,7 +35,7 @@ class transmission($user) {
   }
 
   cron { 'tv':
-    command => "${home}/scripts/online/tv.sh -l http://followshows.com/feed/CCGYc -o ${watch_dir}",
+    command => "${home}/playground/scripts/online/tv.sh -l http://followshows.com/feed/CCGYc -o ${watch_dir}",
     hour    => 4,
     minute  => 30,
     user    => $user,
