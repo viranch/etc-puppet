@@ -4,8 +4,10 @@ class transmission($user) {
 
   package { 'transmission-cli': ensure => installed }
 
-  $dirs = ["${home}/.config/transmission-daemon", "${home}/.config",
-    "${home}/Downloads/watch", "${home}/Downloads"]
+  $config_dir = "${home}/.config/transmission-daemon"
+  $watch_dir = "${home}/Downloads/watch"
+  $dirs = [$config_dir, "${home}/.config",
+    $watch_dir, "${home}/Downloads"]
 
   file { $dirs:
     ensure => directory,
@@ -14,7 +16,7 @@ class transmission($user) {
   }
 
   file { 'settings.json':
-    path => "${home}/.config/transmission-daemon/settings.json",
+    path => "${config_dir}/settings.json",
     content => template('transmission/settings.erb'),
     owner => $user, mode => 600,
     require => File[$dirs],
@@ -30,6 +32,13 @@ class transmission($user) {
     command => '/usr/bin/transmission-daemon',
     special => 'reboot',
     user => $user,
+  }
+
+  cron { 'tv':
+    command => "${home}/scripts/online/tv.sh -l http://followshows.com/feed/CCGYc -o ${watch_dir}",
+    hour    => 4,
+    minute  => 30,
+    user    => $user,
   }
 
 }
