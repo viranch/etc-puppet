@@ -34,4 +34,9 @@ node 'lazybit' {
   ### quassel ###
   include quassel
 
+  ### icinga ###
+  include icinga
+  include icinga::conf
+  include icinga::web
+
 }
