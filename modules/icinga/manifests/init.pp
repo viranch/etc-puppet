@@ -1,9 +1,6 @@
 class icinga {
-  include apache
-
-  package { 'icinga':
-    ensure => latest,
-    require => Package['apache'],
+  package { ['icinga', 'nagios-plugins']:
+    ensure => installed,
   }
 
   service { 'icinga':
