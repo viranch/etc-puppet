@@ -8,8 +8,4 @@ class icinga {
     enable => true,
     require => Package['icinga']
   }
-
-  File {
-    notify => Service['icinga']
-  }
 }
