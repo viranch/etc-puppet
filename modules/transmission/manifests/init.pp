@@ -6,8 +6,9 @@ class transmission($user) {
 
   $config_dir = "${home}/.config/transmission-daemon"
   $watch_dir = "/tmp/watch"
+  $download_dir = "${home}/Downloads"
   $dirs = [$config_dir, "${home}/.config",
-    $watch_dir, "${home}/Downloads"]
+    $watch_dir, $download_dir]
 
   file { $dirs:
     ensure => directory,
