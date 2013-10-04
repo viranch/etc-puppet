@@ -5,7 +5,7 @@ class transmission($user) {
   package { 'transmission-cli': ensure => installed }
 
   $config_dir = "${home}/.config/transmission-daemon"
-  $watch_dir = "${home}/Downloads/watch"
+  $watch_dir = "/tmp/watch"
   $dirs = [$config_dir, "${home}/.config",
     $watch_dir, "${home}/Downloads"]
 
