@@ -10,6 +10,15 @@ class transmission($user) {
   $dirs = [$config_dir, "${home}/.config",
     $watch_dir, $download_dir]
 
+  $systemd_conf = '/etc/systemd/system/transmission.service.d'
+  file {
+    $systemd_conf:
+      ensure => directory, mode => 644;
+
+    "${systemd_conf}/user.conf":
+      content => template('transmission/daemon-user.erb');
+  }
+
   file { $dirs:
     ensure => directory,
     owner => $user,
