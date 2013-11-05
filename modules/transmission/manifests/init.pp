@@ -38,10 +38,8 @@ class transmission($user) {
     owner => $user, mode => 640,
   }
 
-  cron { 'transmission-daemon':
-    command => '/usr/bin/transmission-daemon',
-    special => 'reboot',
-    user => $user,
+  service { 'transmission':
+    ensure => running, enable => true,
   }
 
   cron { 'tv':
