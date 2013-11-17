@@ -1,8 +1,8 @@
 import "templates"
 
-node 'lazybit' {
+node 'lazybit' inherits base-node {
 
-  $user = 'viranch'
+  $admin = hiera('admin', 'admin', 'users')
 
   ### sshd_config ###
   file { '/etc/ssh/sshd_config':
@@ -10,26 +10,12 @@ node 'lazybit' {
     owner => root, group => root, mode => 644,
   }
 
-  ### user setup ###
-  class { 'base-node':
-    user => $::user,
-  }
-
   ### transmission ###
-  class { 'transmission':
-    user => $::user,
-    require => User[$user],
-  }
+  class { 'transmission': require => Class['users'] }
 
   ### http server ###
   $port = '8080'
   include apache
-
-  file { '/srv/http/stuff':
-    ensure => link,
-    target => "/home/${user}/Downloads",
-    require => Class['apache', 'transmission'],
-  }
 
   ### quassel ###
   include quassel

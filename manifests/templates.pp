@@ -1,8 +1,8 @@
-class base-node($user) {
+node base-node {
 
-  class { 'users':
-    username => $user,
-  }
+  $admin = hiera('admin', 'admin', 'users')
+
+  include users
 
   service { 'cronie':
     ensure => running,
@@ -11,28 +11,19 @@ class base-node($user) {
 
   include git
 
-  $home = "/home/${user}"
+  $home = "/home/${admin}"
 
   git::repo { 'dotfiles':
     url => "git://github.com/viranch/dotfiles.git",
     location => "${home}/.dotfiles",
-    as_user => $user,
-    require => User[$user],
+    as_user => $admin,
+    require => User[$admin],
   }
-
-  $scripts_dir = "${home}/playground"
 
   git::repo { 'scripts':
     url => "git://github.com/viranch/scripts.git",
-    location => "${scripts_dir}/scripts",
-    as_user => $user,
-    require => [ User[$user], File[$scripts_dir] ],
-  }
-
-  file { $scripts_dir:
-    ensure => directory,
-    owner => $user,
-    require => User[$user],
+    location => "/opt/scripts",
+    as_user => 'root',
   }
 
   $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml' ]

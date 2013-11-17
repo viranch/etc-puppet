@@ -17,4 +17,16 @@ class apache {
     ensure => directory,
   }
 
+  $users = hiera('users', [], 'users')
+  httpd_symlink { $users: }
+
+  define httpd_symlink() {
+    $user = $name
+    file { "/srv/http/${user}":
+      ensure => link,
+      target => "/home/${user}/Downloads",
+      require => User[$user],
+    }
+  }
+
 }
