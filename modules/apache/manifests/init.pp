@@ -22,7 +22,8 @@ class apache {
 
   define httpd_symlink() {
     $user = $name
-    file { "/srv/http/${user}":
+    $alias = hiera($user, $user, 'apache')
+    file { "/srv/http/${alias}":
       ensure => link,
       target => "/home/${user}/Downloads",
       require => User[$user],
