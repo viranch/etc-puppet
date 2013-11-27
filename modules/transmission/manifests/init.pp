@@ -60,7 +60,7 @@ class transmission {
     if ($link != '') {
       cron { "tv-${user}":
         command => "/opt/scripts/online/tv.sh -a -l ${link} -o ${watch_dir}",
-        hour    => 4,
+        hour    => 5,
         minute  => 30,
         user    => $user,
       }
