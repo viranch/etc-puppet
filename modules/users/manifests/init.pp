@@ -31,5 +31,11 @@ class users {
         managehome => true,
       }
     }
+
+    file { "/home/${username}":
+      ensure  => directory,
+      mode    => 755,
+      require => User[$username];
+    }
   }
 }
