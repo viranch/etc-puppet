@@ -47,18 +47,18 @@ class transmission {
       require => File[$dirs],
     }
 
-    file { "tv-${user}.conf":
-      path => "${home}/.tv.conf",
-      source => "puppet:///modules/transmission/tv-${user}.conf",
-      owner => $user, mode => 640,
-    }
-
     if ($link != '') {
       cron { "tv-${user}":
         command => "/opt/scripts/online/tv.sh -a -l ${link} -o ${watch_dir}",
         hour    => 4,
         minute  => 30,
         user    => $user,
+      }
+
+      file { "tv-${user}.conf":
+        path => "${home}/.tv.conf",
+        source => "puppet:///modules/transmission/tv-${user}.conf",
+        owner => $user, mode => 640,
       }
     }
 
