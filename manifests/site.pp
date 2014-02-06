@@ -13,6 +13,9 @@ node 'lazybit' inherits base-node {
   ### transmission ###
   class { 'transmission': require => Class['users'] }
 
+  ### tv ###
+  class { 'tv': require => Class['transmission'] }
+
   ### http server ###
   $port = '8080'
   include apache
