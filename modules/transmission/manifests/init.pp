@@ -28,10 +28,6 @@ class transmission {
       $email = $user_data['email']
     }
 
-    $email_notify = hiera('notifications', $default, 'transmission')
-    $em_username = $email_notify['user']
-    $em_pass = $email_notify['password']
-
     $config_dir = "${home}/.config/transmission-daemon"
     $watch_dir = "/tmp/watch-${user}"
     $download_dir = "${home}/Downloads"
@@ -67,8 +63,8 @@ class transmission {
     }
 
     if ($email != '') {
-      file { "${home}/.gmail":
-        content => template('transmission/email.erb'),
+      file { "${home}/.push":
+        content => template('transmission/push.erb'),
         owner => $user, mode => 640,
       }
     }
