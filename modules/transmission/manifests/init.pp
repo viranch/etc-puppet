@@ -36,6 +36,8 @@ class transmission {
       require => Package['transmission-cli'],
     }
 
+    $watch_dir = "/tmp/watch-${user}"
+
     file { "${user}-settings.json":
       path => "${config_dir}/settings.json",
       content => template('transmission/settings.erb'),
