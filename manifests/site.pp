@@ -1,6 +1,6 @@
 import "templates"
 
-node 'lazybit' inherits base-node {
+node 'viranch.me' inherits base-node {
 
   $admin = hiera('admin', 'admin', 'users')
 
