@@ -36,7 +36,7 @@ class transmission {
       require => Package['transmission-cli'],
     }
 
-    $watch_dir = "/tmp/watch-${user}"
+    $watch_dir = "${home}/watch"
 
     file { "${user}-settings.json":
       path => "${config_dir}/settings.json",

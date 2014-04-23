@@ -11,7 +11,7 @@ class tv {
     $link = hiera("${user}-link", '', 'tv')
 
     if ($link != '') {
-      $watch_dir = "/tmp/watch-${user}"
+      $watch_dir = "${home}/watch"
 
       cron { "tv-${user}":
         command => "/opt/scripts/online/tv.sh -a -l ${link} -o ${watch_dir}",
@@ -26,7 +26,7 @@ class tv {
           source => "puppet:///modules/tv/${user}.conf",
           owner => $user, mode => 640;
 
-        "/tmp/watch-${user}":
+        $watch_dir:
           ensure => directory,
           owner => $user;
       }
