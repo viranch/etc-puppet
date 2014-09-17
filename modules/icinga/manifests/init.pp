@@ -13,7 +13,7 @@ class icinga {
     before => Package['icinga'],
   }
 
-  package { ['icinga', 'nagios-plugins']:
+  package { ['icinga', 'monitoring-plugins']:
     ensure => installed,
   }
 
