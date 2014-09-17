@@ -1,6 +1,5 @@
-import "templates"
-
-node 'viranch.me' inherits base-node {
+node 'viranch.me' {
+  include base-node
 
   $admin = hiera('admin', 'admin', 'users')
 

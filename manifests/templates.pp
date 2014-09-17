@@ -1,4 +1,4 @@
-node base-node {
+class base-node {
 
   $admin = hiera('admin', 'admin', 'users')
 
