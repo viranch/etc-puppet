@@ -5,8 +5,16 @@ class icinga::web {
   package { $mod_cgi: ensure => installed }
 
   file { '/etc/httpd/conf/extra/icinga.conf':
-    ensure => link,
-    target => '/etc/icinga/apache.example.conf',
+    ensure  => link,
+    target  => '/etc/icinga/apache.example.conf',
     require => Package['icinga', 'apache', $mod_cgi],
+    before  => Service['httpd'],
+  }
+
+  user { 'http':
+    ensure  => present,
+    groups  => 'icinga',
+    require => Package['apache', 'icinga'],
+    before  => Service['httpd'],
   }
 }
