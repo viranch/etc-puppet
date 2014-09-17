@@ -26,7 +26,7 @@ class base-node {
     as_user => 'root',
   }
 
-  $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml' ]
+  $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml', 'yaourt' ]
 
   package { $packages: ensure => installed }
 
