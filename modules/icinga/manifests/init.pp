@@ -5,12 +5,13 @@ class icinga {
   }
 
   user { 'icinga':
-    ensure => present,
-    home   => '/dev/null',
-    shell  => '/bin/false',
-    gid    => 'icinga',
-    groups => 'http',
-    before => Package['icinga'],
+    ensure     => present,
+    home       => '/var/spool/icinga',
+    managehome => true,
+    shell      => '/bin/false',
+    gid        => 'icinga',
+    groups     => 'http',
+    before     => Package['icinga'],
   }
 
   package { ['icinga', 'monitoring-plugins']:
