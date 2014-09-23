@@ -1,5 +1,5 @@
 function push()
 {
     rcpt="<%= @email %>"
-    mailx -S smtp=$(dig +short mx `echo $rcpt | cut -d'@' -f2` | head -n1 | cut -d' ' -f2):25 -S from=$1 -s "$2" $rcpt < /dev/null
+    echo | mailx -S smtp=$(dig +short mx `echo $rcpt | cut -d'@' -f2` | head -n1 | cut -d' ' -f2) -r $1 -s "$2" $rcpt
 }
