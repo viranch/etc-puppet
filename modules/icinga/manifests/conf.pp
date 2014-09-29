@@ -14,4 +14,19 @@ class icinga::conf {
       source => 'puppet:///modules/icinga/conf';
   }
 
+  # setup push
+
+  $users_data = hiera('users', $default, 'transmission')
+  $admin_user = hiera('admin','','users')
+  $admin_user_data = $users_data[$admin_user]
+
+  if ($admin_user_data != '') {
+    $email = $admin_user['email']
+
+    file { "/opt/scripts/push":
+      content => template('transmission/push.erb'),
+      mode    => 644,
+    }
+  }
+
 }
