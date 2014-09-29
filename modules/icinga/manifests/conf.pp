@@ -21,7 +21,7 @@ class icinga::conf {
   $admin_user_data = $users_data[$admin_user]
 
   if ($admin_user_data != '') {
-    $email = $admin_user['email']
+    $email = $admin_user_data['email']
 
     file { "/opt/scripts/push":
       content => template('transmission/push.erb'),
