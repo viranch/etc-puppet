@@ -30,4 +30,6 @@ class base-node {
 
   package { $packages: ensure => installed }
 
+  include security
+
 }
