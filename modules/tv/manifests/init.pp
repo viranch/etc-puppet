@@ -14,7 +14,7 @@ class tv {
       $watch_dir = "${home}/watch"
 
       cron { "tv-${user}":
-        command => "/opt/scripts/online/tv.sh -a -l ${link} -o ${watch_dir} -s 720p",
+        command => "/opt/scripts/online/tv.sh -a -l ${link} -o ${watch_dir} -s 720p >> \$HOME/`basename ${link}`.log",
         hour    => 4,
         minute  => 30,
         user    => $user,
