@@ -12,9 +12,4 @@ node 'viranch.me' {
   ### quassel ###
   include quassel
 
-  ### icinga ###
-  include icinga
-  include icinga::conf
-  include icinga::web
-
 }
