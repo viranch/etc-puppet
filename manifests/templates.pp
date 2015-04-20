@@ -25,6 +25,9 @@ class base-node {
   admin_repo {
     'dotfiles':
       repo_dir => '.dotfiles';
+
+    'docker-vps':
+      repo_dir => 'vps';
   }
 
   git::repo { 'scripts':
