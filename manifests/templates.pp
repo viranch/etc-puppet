@@ -13,11 +13,18 @@ class base-node {
 
   $home = "/home/${admin}"
 
-  git::repo { 'dotfiles':
-    url => "git://github.com/viranch/dotfiles.git",
-    location => "${home}/.dotfiles",
-    as_user => $admin,
-    require => User[$admin],
+  define admin_repo($repo_dir) {
+    git::repo { $name:
+      url => "git://github.com/${admin}/${name}.git",
+      location => "${home}/${repo_dir}",
+      as_user => $admin,
+      require => User[$admin],
+    }
+  }
+
+  admin_repo {
+    'dotfiles':
+      repo_dir => '.dotfiles';
   }
 
   git::repo { 'scripts':
