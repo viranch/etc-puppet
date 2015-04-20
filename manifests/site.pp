@@ -9,7 +9,4 @@ node 'viranch.me' {
     owner => root, group => root, mode => 644,
   }
 
-  ### quassel ###
-  include quassel
-
 }
