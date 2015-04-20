@@ -16,7 +16,7 @@ class base-node {
   define admin_repo($repo_dir) {
     git::repo { $name:
       url => "git://github.com/${admin}/${name}.git",
-      location => "${home}/${repo_dir}",
+      location => "/home/${admin}/${repo_dir}",
       as_user => $admin,
       require => User[$admin],
     }
