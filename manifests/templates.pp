@@ -33,7 +33,7 @@ class base-node {
 
     'scripts':
       username => $username,
-      repo_dir => 'playground/.scripts';
+      repo_dir => 'playground/scripts';
   }
 
   $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml', 'yaourt' ]
