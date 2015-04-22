@@ -13,7 +13,7 @@ class base-node {
 
   $home = "/home/${username}"
 
-  define user_repo($repo_dir) {
+  define user_repo($username, $repo_dir) {
     git::repo { $name:
       url => "git://github.com/viranch/${name}.git",
       location => "/home/${username}/${repo_dir}",
@@ -24,12 +24,15 @@ class base-node {
 
   user_repo {
     'dotfiles':
+      username => $username,
       repo_dir => '.dotfiles';
 
     'docker-vps':
+      username => $username,
       repo_dir => 'vps';
 
     'scripts':
+      username => $username,
       repo_dir => 'playground/.scripts';
   }
 
