@@ -4,38 +4,24 @@ class users {
 
   package { $packages: ensure => installed }
 
-  $users = hiera('users', [], 'users')
+  $username = hiera('username', 'admin', 'users')
 
-  create_user { $users: }
+  user { $username:
+    ensure => present,
+    managehome => true,
+    shell => '/bin/zsh',
+    require => Package['zsh'],
+  }
 
-  define create_user() {
-    $username = $name
+  file { '/etc/sudoers':
+    content => template('users/sudoers.erb'),
+    owner => root, group => root, mode => 440,
+    require => Package['sudo'],
+  }
 
-    if ($username == hiera('admin', '', 'users')) {
-      user { $username:
-        ensure => present,
-        managehome => true,
-        shell => '/bin/zsh',
-        require => Package['zsh'],
-      }
-
-      file { '/etc/sudoers':
-        content => template('users/sudoers.erb'),
-        owner => root, group => root, mode => 440,
-        require => Package['sudo'],
-      }
-    }
-    else {
-      user { $username:
-        ensure => present,
-        managehome => true,
-      }
-    }
-
-    file { "/home/${username}":
-      ensure  => directory,
-      mode    => 755,
-      require => User[$username];
-    }
+  file { "/home/${username}":
+    ensure  => directory,
+    mode    => 755,
+    require => User[$username];
   }
 }

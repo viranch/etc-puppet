@@ -1,6 +1,6 @@
 class base-node {
 
-  $admin = hiera('admin', 'admin', 'users')
+  $username = hiera('username', 'admin', 'users')
 
   include users
 
@@ -11,29 +11,26 @@ class base-node {
 
   include git
 
-  $home = "/home/${admin}"
+  $home = "/home/${username}"
 
-  define admin_repo($repo_dir) {
+  define user_repo($repo_dir) {
     git::repo { $name:
-      url => "git://github.com/${admin}/${name}.git",
-      location => "/home/${admin}/${repo_dir}",
-      as_user => $admin,
-      require => User[$admin],
+      url => "git://github.com/viranch/${name}.git",
+      location => "/home/${username}/${repo_dir}",
+      as_user => $username,
+      require => User[$username],
     }
   }
 
-  admin_repo {
+  user_repo {
     'dotfiles':
       repo_dir => '.dotfiles';
 
     'docker-vps':
       repo_dir => 'vps';
-  }
 
-  git::repo { 'scripts':
-    url => "git://github.com/viranch/scripts.git",
-    location => "/opt/scripts",
-    as_user => 'root',
+    'scripts':
+      repo_dir => 'playground/.scripts';
   }
 
   $packages = [ 'python2', 'dnsutils', 'inetutils', 'ncdu', 'python2-lxml', 'yaourt' ]
